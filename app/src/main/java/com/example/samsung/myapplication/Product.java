@@ -17,7 +17,7 @@ public class Product {
     private String optionTitle; //옵션이름
     private List optionValueList =new ArrayList<>(); //옵션밸류값
     private List optionPriceList =new ArrayList<>(); //옵션가격
-
+    private int changeValue=0;
 
     @Override
     public String toString() {
@@ -88,11 +88,24 @@ public class Product {
         this.optionValueList.add(optionValue);
     }
 
+    public void setChagneValue(int add){ //1이면 추가된것,0이면 추가안된것
+        changeValue=add;
+    }
+    public int getChangeValue(){ //1이면 추가된것, 0이면 추가안된것
+        return changeValue;
+    }
     public List getOptionPriceList() {
         return optionPriceList;
     }
 
     public void setOptionPriceList(String optionPrice) {
         this.optionPriceList.add(optionPrice);
+    }
+
+    public int errorMessage(String productName,List optionValueList){
+        if(productName==null||optionValueList.size()==0) {
+            return 0; //검색결과 없을때 0
+        }
+        else return 1; //검색결과 있을때 1
     }
 }

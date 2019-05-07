@@ -28,7 +28,7 @@ public class ProductSearchService {
     private String sortCd="CP"; //정렬순 //CP:인기순 A:누적판매순 G:평가높은순 I:후기/리뷰많은순 L:낮은가격순 H:높은가격순 N:최근등록순
 
      // 상품검색 요청 URL
-    String URL="https://openapi.11st.co.kr/openapi/OpenApiService.tmall?key=ad722ec66e955e9c584c2b828158dee9&apiCode=ProductSearch&pageNum=\"+PAGE_NUM+\"&pageSize=\"+PAGE_SIZE+\"&sortCd=\"+sortCd+\"&keyword=";
+    String URL="https://openapi.11st.co.kr/openapi/OpenApiService.tmall?key=ad722ec66e955e9c584c2b828158dee9&apiCode=ProductSearch&pageNum="+PAGE_NUM+"&pageSize="+PAGE_SIZE+"&sortCd="+sortCd+"&keyword=";
     //상품정보조회 요청 URL
     String URL_DETAIL="http://openapi.11st.co.kr/openapi/OpenApiService.tmall?key=ad722ec66e955e9c584c2b828158dee9&apiCode=ProductInfo&productCode=";
 
@@ -76,7 +76,7 @@ public class ProductSearchService {
             URL url;
             url = new URL(URL+ URLEncoder.encode(keyword, "EUC-KR"));
             URLConnection urlConn = url.openConnection();
-            
+
             // xml파서객체만들고
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = factory.newPullParser();
@@ -151,10 +151,9 @@ public class ProductSearchService {
     }
 
     //상세정보 조회
-    public List<Product> search_detail(List<Product> productList) {
+    public List<Product> search_detail(List<Product> productList,String color) {
         for (int i = 0; i < productList.size(); i++) {
             URL_DETAIL="http://openapi.11st.co.kr/openapi/OpenApiService.tmall?key=ad722ec66e955e9c584c2b828158dee9&apiCode=ProductInfo&productCode=";
-            int optionNum=0;
             Product p=productList.get(i);
             productcode=p.getProductCode();
             URL_DETAIL=URL_DETAIL+productcode+"&option=PdOption";
@@ -198,13 +197,16 @@ public class ProductSearchService {
                                 case "ValueName":
                                     if (p != null) {
                                         String name=parser.nextText();
-                                        p.setOptionValueList(name);
-                                        optionNum++;
-
+                                        if(name.contains(color)){ //색 필터링
+                                            p.setOptionValueList(name);
+                                            p.setChagneValue(1);//추가됐을때
+                                        }
+                                        else
+                                            p.setChagneValue(0); //추가안됐을때
                                     }
                                     break;
                                 case "Price":
-                                    if (p != null&&p.getOptionValueList().size()>0) {
+                                    if (p != null&&p.getOptionValueList().size()>0&&p.getChangeValue()==1) {
                                         String price=parser.nextText();
                                         p.setOptionPriceList(price);
                                     }
@@ -212,7 +214,6 @@ public class ProductSearchService {
                             }
                         }
                     }
-
                     eventType = parser.next();
                 }
 

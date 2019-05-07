@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by SAMSUNG on 2019-03-19.
@@ -85,14 +86,20 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         //여기부터 이제 홀더객체 안의 각  위젯에 book객체의 각 멤버면수값들이랑 바인딩하면 됨ㅇㅇ
 //        holder.imageView.setImageResource(R.drawable.ic_launcher);
-        holder.productName.setText(p.getProductName());
-        holder.productPrice.setText("대표가격: " + p.getProductPrice());
-        holder.optionTitle.setText("옵션이름: " + p.getOptionTitle());
-        holder.optionValue.setText("옵션값: " + p.getOptionValueList().get(0));
-        holder.optionPrice.setText("옵션가격: " + p.getOptionPriceList().get(0));
-
+        int a=p.errorMessage(p.getProductName(),p.getOptionValueList());
+        Log.i("에러",""+a);
+        if(a==0){ //검색결과 없을때
+            holder.productName.setText("검색결과가 없습니다.");
+        }
+        else { //검색결과 없을때
+            holder.productName.setText(p.getProductName());
+            holder.productPrice.setText("대표가격: " + p.getProductPrice());
+            holder.optionTitle.setText("옵션이름: " + p.getOptionTitle());
+            holder.optionValue.setText("옵션값: " + p.getOptionValueList().get(0));
+            holder.optionPrice.setText("옵션가격: " + p.getOptionPriceList().get(0));
+            new ImageDownLoader(holder.imageView).execute(p.getProductImage());
+        }
         //book.getImage() < url에 접속해서 사진을 다운받아 디코딩해서 ImageView에 set
-        new ImageDownLoader(holder.imageView).execute(p.getProductImage());
 //      imageLoader.DisplayImage(p.getProductImage(), holder.imageView);
 
         return convertView;
