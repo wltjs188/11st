@@ -57,8 +57,12 @@ public class ProductAdapter extends ArrayAdapter<Product> {
                     = (TextView) convertView.findViewById(R.id.product_productName);
             holder.productPrice
                     = (TextView) convertView.findViewById(R.id.product_price);
-            holder.productSeller
-                    = (TextView) convertView.findViewById(R.id.product_seller);
+            holder.optionTitle
+                    = (TextView) convertView.findViewById(R.id.option_title);
+            holder.optionValue
+                    = (TextView) convertView.findViewById(R.id.option_value);
+            holder.optionPrice
+                    = (TextView) convertView.findViewById(R.id.option_price);
             //처음 인플레이션 될 때 홀더 객체를 만들어서
             //홀더 셋트의 위젯 참조변수들이 findViewById
 
@@ -77,13 +81,16 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         //3. 각 위젯에 데이터 바인딩하기
 
 
-        Product    p = productList.get(position);
+        Product p = productList.get(position);
 
         //여기부터 이제 홀더객체 안의 각  위젯에 book객체의 각 멤버면수값들이랑 바인딩하면 됨ㅇㅇ
 //        holder.imageView.setImageResource(R.drawable.ic_launcher);
         holder.productName.setText(p.getProductName());
-        holder.productPrice.setText("가격: " + p.getProductPrice());
-        holder.productSeller.setText("판매자: " + p.getSeller());
+        holder.productPrice.setText("대표가격: " + p.getProductPrice());
+        holder.optionTitle.setText("옵션이름: " + p.getOptionTitle());
+        holder.optionValue.setText("옵션값: " + p.getOptionValueList().get(0));
+        holder.optionPrice.setText("옵션가격: " + p.getOptionPriceList().get(0));
+
         //book.getImage() < url에 접속해서 사진을 다운받아 디코딩해서 ImageView에 set
         new ImageDownLoader(holder.imageView).execute(p.getProductImage());
 //      imageLoader.DisplayImage(p.getProductImage(), holder.imageView);
@@ -128,12 +135,13 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
     }
 
-
     static class ProductViewHolder{
         public ImageView imageView;
         public TextView productName;
         public TextView productPrice;
-        public TextView productSeller;
+        public TextView optionTitle;
+        public TextView optionValue;
+        public TextView optionPrice;
     }
 
 }

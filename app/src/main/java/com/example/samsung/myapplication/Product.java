@@ -1,29 +1,28 @@
 package com.example.samsung.myapplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by SAMSUNG on 2019-03-19.
  */
 
 public class Product {
-    private String productCode;
-    private String productName;
-    private String productImage;
-    private String productDetailUrl;
-    private String productPrice;
-    private String seller;
-    private String rating;
-    private String salePrice;
-    private String delivery;
-    private String reviewCount;
-    private String buySatisfy;
-    private String benefit;
+    private String productCode; //상품코드
+    private String productName; //상품명
+    private String productImage; //상품이미지
+    private String productDetailUrl; //상세url
+    private String productPrice; //상품대표가격
+    private String optionOrder; //상품옵션순서
+    private String optionTitle; //옵션이름
+    private List optionValueList =new ArrayList<>(); //옵션밸류값
+    private List optionPriceList =new ArrayList<>(); //옵션가격
+
 
     @Override
     public String toString() {
         return "Product [productCode=" + productCode + ", productName=" + productName + ", productImage=" + productImage
-                + ", productDetailUrl=" + productDetailUrl + ", productPrice=" + productPrice + ", seller=" + seller
-                + ", rating=" + rating + ", salePrice=" + salePrice + ", delivery=" + delivery + ", reviewCount="
-                + reviewCount + ", buySatisfy=" + buySatisfy + ", benefit=" + benefit + "]";
+                + ", productDetailUrl=" + productDetailUrl + ", productPrice=" + productPrice + "]";
     }
 
     public String getProductCode() {
@@ -42,8 +41,6 @@ public class Product {
         this.productName = productName;
     }
 
-
-
     public String getProductDetailUrl() {
         return productDetailUrl;
     }
@@ -51,7 +48,6 @@ public class Product {
     public void setProductDetailUrl(String productDetailUrl) {
         this.productDetailUrl = productDetailUrl;
     }
-
     public String getProductPrice() {
         return productPrice;
     }
@@ -60,67 +56,43 @@ public class Product {
         this.productPrice = productPrice;
     }
 
-    public String getSeller() {
-        return seller;
-    }
-
-    public void setSeller(String seller) {
-        this.seller = seller;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
-    public String getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(String salePrice) {
-        this.salePrice = salePrice;
-    }
-
-    public String getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(String delivery) {
-        this.delivery = delivery;
-    }
-
-    public String getReviewCount() {
-        return reviewCount;
-    }
-
-    public void setReviewCount(String reviewCount) {
-        this.reviewCount = reviewCount;
-    }
-
-    public String getBuySatisfy() {
-        return buySatisfy;
-    }
-
-    public void setBuySatisfy(String buySatisfy) {
-        this.buySatisfy = buySatisfy;
-    }
-
-    public String getBenefit() {
-        return benefit;
-    }
-
-    public void setBenefit(String benefit) {
-        this.benefit = benefit;
-    }
-
     public String getProductImage() {
         return productImage;
     }
 
     public void setProductImage(String productImage) {
         this.productImage = productImage;
+    }
+
+    public void setOptionOrder(String optionOrder) {
+        this.optionOrder = optionOrder;
+    }
+
+    public void setOptionTitle(String optionTitle) {
+        this.optionTitle = optionTitle;
+    }
+
+    public String getOptionOrder() {
+        return optionOrder;
+    }
+
+    public String getOptionTitle() {
+        return optionTitle;
+    }
+
+    public List getOptionValueList() {
+        return optionValueList;
+    }
+
+    public void setOptionValueList(String optionValue) {
+        this.optionValueList.add(optionValue);
+    }
+
+    public List getOptionPriceList() {
+        return optionPriceList;
+    }
+
+    public void setOptionPriceList(String optionPrice) {
+        this.optionPriceList.add(optionPrice);
     }
 }
