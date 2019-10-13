@@ -9,6 +9,10 @@ public class Option {
     private String optionTitle; //상세 정보 이름
     private String optionValue; //상세 정보 값
     private String optionPrice;
+    private DiscountInfo discountInfo=new DiscountInfo();
+    private String Point; //적립 포인트
+    private String Installment; //무이자
+    private String ShipFee; //배송비
     private int changeValue=0;
 
     @Override
@@ -25,7 +29,7 @@ public class Option {
             str+=words[i]+" : "+words2[i]+"\n";
         }
         //  Log.d("채윤이",this.getProductDetailUrl());
-        return "상품코드"+productCode+""+str+"옵션번호:"+optionOrder+"\n";
+        return "상품코드"+productCode+""+str+"옵션번호:"+optionOrder+"포인트:"+Point+"무이자"+Installment+"배송비"+ShipFee+"\n";
     }
     public String getProductCode() {
         return productCode;
@@ -70,6 +74,13 @@ public class Option {
     }
     public void setOptionPrice(String optionPrice) {
         this.optionPrice = optionPrice;
+    }
+    public DiscountInfo getDiscountInfo() {
+        return discountInfo;
+    }
+
+    public void setDiscountInfo(DiscountInfo discountInfo) {
+        this.discountInfo = discountInfo;
     }
 
 }

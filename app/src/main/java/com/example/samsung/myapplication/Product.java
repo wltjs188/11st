@@ -17,6 +17,8 @@ public class Product {
     private String optionTitle; //옵션이름
     private List optionValueList =new ArrayList<>(); //옵션밸류값
     private List optionPriceList =new ArrayList<>(); //옵션가격
+    private List reviewList = new ArrayList<>(); //리뷰
+
     private int changeValue=0;
 
     @Override
@@ -101,6 +103,12 @@ public class Product {
     public void setOptionPriceList(String optionPrice) {
         this.optionPriceList.add(optionPrice);
     }
+    public void setReviewList(String review){
+        this.reviewList.add(review);
+    }
+    public List getReviewList(){
+        return reviewList;
+    }
 
     public int errorMessage(String productName,List optionValueList){
         if(productName==null||optionValueList.size()==0) {
@@ -108,4 +116,6 @@ public class Product {
         }
         else return 1; //검색결과 있을때 1
     }
+
+
 }
